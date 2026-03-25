@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Kokoro for Education — 学校・自治体・家族のために</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#EEEEF6;--bg-card:#F8F9FF;--bg-dark:#1A1828;
+  --border:#DCDDF0;--text-hi:#1A1828;--text-md:#58547A;--text-lo:#A09CC0;
+  --lav:#8870C8;--lav-lt:#F0ECFF;--lav-mid:#BEB0E8;
+  --mint:#56B0A8;--mint-lt:#E4F6F4;--mint-mid:#98D4CE;
+  --blue:#5B7EC8;--blue-lt:#E8EEFA;--blue-mid:#9DB8E8;
+  --terra:#C87060;--terra-lt:#FAECEA;--terra-mid:#E8A898;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Noto Sans JP',sans-serif;
+  --mono:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);background:var(--bg);color:var(--text-hi);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}
+button{border:none;cursor:pointer;font-family:inherit;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;padding:0 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(238,238,246,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:var(--serif);font-size:22px;font-weight:600;letter-spacing:4px;}
+.nav-badge{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--mint);background:var(--mint-lt);border:1px solid var(--mint-mid);padding:4px 12px;border-radius:100px;margin-left:10px;}
+.nav-right{display:flex;gap:12px;align-items:center;}
+.nav-lang{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--text-lo);border:1px solid var(--border);padding:5px 12px;border-radius:100px;background:transparent;cursor:pointer;transition:all .2s;}
+.nav-lang:hover{border-color:var(--mint);color:var(--mint);}
+.nav-cta{font-size:12px;font-weight:700;background:var(--mint);color:#fff;padding:10px 22px;border-radius:100px;transition:all .2s;}
+.nav-cta:hover{box-shadow:0 4px 16px rgba(86,176,168,.4);transform:translateY(-1px);}
+
+/* PILOT BANNER */
+.pilot-banner{background:linear-gradient(90deg,#E8EEFA 0%,#E4F6F4 100%);border-bottom:1px solid var(--border);padding:16px 80px;text-align:center;}
+.pilot-text{font-size:13px;color:var(--mint);font-weight:600;letter-spacing:.5px;}
+.pilot-text em{color:var(--mint);font-style:italic;}
+
+/* HERO */
+.hero{min-height:100vh;padding:120px 80px 80px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;overflow:hidden;border-bottom:1px solid var(--border);}
+.hero-blob1{position:absolute;top:-200px;right:-100px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(86,176,168,.12) 0%,transparent 65%);pointer-events:none;}
+.hero-blob2{position:absolute;bottom:-150px;left:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(91,126,200,.1) 0%,transparent 65%);pointer-events:none;}
+.hero-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:3px;color:var(--mint);text-transform:uppercase;display:flex;align-items:center;gap:12px;margin-bottom:28px;opacity:0;animation:fadeUp .8s .1s forwards;}
+.hero-eyebrow::before{content:'';width:36px;height:1px;background:var(--mint);}
+.hero-h1{font-family:var(--serif);font-size:clamp(44px,5.5vw,78px);font-weight:300;line-height:1.05;letter-spacing:-1px;color:var(--text-hi);margin-bottom:28px;opacity:0;animation:fadeUp .8s .2s forwards;}
+.hero-h1 em{font-style:italic;color:var(--mint);}
+.hero-sub{font-size:15px;line-height:2;color:var(--text-md);max-width:520px;margin-bottom:40px;opacity:0;animation:fadeUp .8s .3s forwards;}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;opacity:0;animation:fadeUp .8s .4s forwards;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--mint);color:#fff;font-size:13px;font-weight:700;padding:14px 28px;border-radius:16px;transition:all .22s;}
+.btn-primary:hover{box-shadow:0 8px 24px rgba(86,176,168,.4);transform:translateY(-2px);}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--border);color:var(--text-md);font-size:13px;padding:14px 24px;border-radius:16px;background:transparent;transition:all .22s;}
+.btn-outline:hover{border-color:var(--mint);color:var(--mint);}
+.audience-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
+.tab-btn{font-size:11px;font-weight:700;letter-spacing:.5px;padding:8px 18px;border-radius:100px;border:1.5px solid var(--border);color:var(--text-lo);background:transparent;cursor:pointer;transition:all .22s;}
+.tab-btn.active-school{background:var(--blue-lt);border-color:var(--blue-mid);color:var(--blue);}
+.tab-btn.active-family{background:var(--terra-lt);border-color:var(--terra-mid);color:var(--terra);}
+.tab-btn.active-govt{background:var(--mint-lt);border-color:var(--mint-mid);color:var(--mint);}
+.audience-panel{background:var(--bg-card);border:1px solid var(--border);border-radius:24px;padding:32px;box-shadow:0 16px 48px rgba(26,24,40,.07);}
+.panel{display:none;}
+.panel.active{display:block;}
+.panel-icon{font-size:40px;margin-bottom:16px;}
+.panel-title{font-family:var(--serif);font-size:26px;color:var(--text-hi);margin-bottom:8px;}
+.panel-sub{font-size:13px;color:var(--text-md);line-height:1.8;margin-bottom:20px;}
+.panel-points{display:flex;flex-direction:column;gap:10px;}
+.panel-point{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--text-md);line-height:1.7;}
+.pp-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:6px;}
+.dot-blue{background:var(--blue);}
+.dot-terra{background:var(--terra);}
+.dot-mint{background:var(--mint);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+/* CRISIS */
+.crisis{background:var(--bg-dark);padding:80px;display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:center;border-bottom:1px solid rgba(255,255,255,.06);}
+.crisis-label{font-family:var(--mono);font-size:10px;letter-spacing:3px;color:rgba(255,255,255,.3);text-transform:uppercase;margin-bottom:16px;}
+.crisis-h2{font-family:var(--serif);font-size:clamp(32px,4vw,52px);font-weight:300;line-height:1.1;color:#fff;margin-bottom:16px;}
+.crisis-h2 em{font-style:italic;color:#98D4CE;}
+.crisis-note{font-size:11px;color:rgba(255,255,255,.25);line-height:1.8;}
+.crisis-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.cstat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:18px;padding:28px 20px;}
+.cstat-num{font-family:var(--serif);font-size:48px;font-weight:300;line-height:1;margin-bottom:8px;}
+.cstat-num.mint{color:#98D4CE;}
+.cstat-num.lav{color:#BEB0E8;}
+.cstat-num.terra{color:#E8A898;}
+.cstat-label{font-size:12px;color:rgba(255,255,255,.5);line-height:1.7;}
+.cstat-source{font-size:10px;color:rgba(255,255,255,.2);margin-top:8px;font-family:var(--mono);}
+
+/* FEATURES */
+.features{padding:120px 80px;border-bottom:1px solid var(--border);}
+.section-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.section-eyebrow::before{content:'';width:36px;height:1px;}
+.ey-mint{color:var(--mint);}
+.ey-mint::before{background:var(--mint);}
+.ey-terra{color:var(--terra);}
+.ey-terra::before{background:var(--terra);}
+.ey-blue{color:var(--blue);}
+.ey-blue::before{background:var(--blue);}
+.ey-lav{color:var(--lav);}
+.ey-lav::before{background:var(--lav);}
+.section-h2{font-family:var(--serif);font-size:clamp(36px,4.5vw,62px);font-weight:300;line-height:1.08;letter-spacing:-.5px;color:var(--text-hi);margin-bottom:16px;}
+.section-h2 em.mint{color:var(--mint);}
+.section-h2 em.terra{color:var(--terra);}
+.section-h2 em.blue{color:var(--blue);}
+.section-h2 em.lav{color:var(--lav);}
+.section-sub{font-size:14px;line-height:2;color:var(--text-md);max-width:620px;margin-bottom:64px;}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.feat{background:var(--bg-card);border:1px solid var(--border);border-radius:22px;padding:32px 26px;transition:transform .22s,box-shadow .22s;}
+.feat:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(26,24,40,.08);}
+.feat-icon{font-size:32px;margin-bottom:18px;display:block;}
+.feat-tag{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;}
+.feat-tag.school{color:var(--blue);}
+.feat-tag.family{color:var(--terra);}
+.feat-tag.govt{color:var(--mint);}
+.feat-title{font-family:var(--serif);font-size:22px;color:var(--text-hi);margin-bottom:10px;line-height:1.25;}
+.feat-desc{font-size:13px;line-height:1.9;color:var(--text-md);}
+
+/* FAMILY */
+.family{padding:120px 80px;background:linear-gradient(160deg,#FDF0EE 0%,#F8F9FF 50%,#E4F6F4 100%);border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+.family-blob{position:absolute;top:-100px;right:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(200,112,96,.08) 0%,transparent 65%);pointer-events:none;}
+.family-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+.family-scenarios{display:flex;flex-direction:column;gap:16px;}
+.scenario{background:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.9);border-radius:20px;padding:24px;backdrop-filter:blur(8px);transition:transform .22s;}
+.scenario:hover{transform:translateX(4px);}
+.sc-header{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.sc-icon{font-size:24px;}
+.sc-label{font-size:11px;font-weight:700;letter-spacing:1px;color:var(--terra);text-transform:uppercase;}
+.sc-title{font-size:15px;font-weight:700;color:var(--text-hi);margin-bottom:6px;}
+.sc-desc{font-size:13px;color:var(--text-md);line-height:1.8;}
+.sc-quote{font-family:var(--serif);font-size:14px;font-style:italic;color:var(--terra);margin-top:10px;padding-left:12px;border-left:2px solid var(--terra-mid);}
+.family-mockup{position:relative;display:flex;flex-direction:column;align-items:center;}
+.mockup-phone{width:240px;height:500px;background:var(--bg-dark);border-radius:36px;border:6px solid #28243E;overflow:hidden;position:relative;box-shadow:0 32px 80px rgba(26,24,40,.3);}
+.mp-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:72px;height:20px;background:#28243E;border-radius:0 0 14px 14px;z-index:10;}
+.mp-screen{width:100%;height:100%;background:linear-gradient(160deg,#F0ECFF,#E8F6F4);padding:28px 14px 14px;overflow:hidden;}
+.mp-title{font-family:var(--serif);font-size:13px;font-weight:600;letter-spacing:2px;color:#1A1828;margin-bottom:14px;}
+.share-card{border-radius:14px;padding:12px;margin-bottom:8px;background:rgba(255,255,255,.75);}
+.sh-row{display:flex;align-items:center;gap:8px;}
+.sh-avatar{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;}
+.sh-name{font-size:8px;color:#A09CC0;font-weight:600;}
+.sh-mood{font-size:20px;margin:6px 0 2px 32px;}
+.sh-text{font-size:7px;color:#58547A;line-height:1.6;margin-left:32px;}
+.ai-suggest{background:linear-gradient(135deg,#FAECEA,#F8F9FF);border-radius:12px;padding:10px;margin-top:10px;border:1px solid rgba(200,112,96,.2);}
+.ai-label{font-size:6px;color:#C87060;letter-spacing:1px;font-weight:700;text-transform:uppercase;margin-bottom:5px;}
+.ai-text{font-size:7px;color:#3C3858;line-height:1.6;}
+.float-chips{display:flex;flex-direction:column;gap:8px;margin-top:20px;width:100%;}
+.float-chip{background:rgba(255,255,255,.9);border:1px solid var(--border);border-radius:100px;padding:8px 18px;font-size:11px;font-weight:600;box-shadow:0 4px 16px rgba(26,24,40,.08);text-align:center;}
+
+/* HOW */
+.how{padding:120px 80px;border-bottom:1px solid var(--border);}
+.how-tabs{display:flex;gap:8px;margin-bottom:40px;flex-wrap:wrap;}
+.how-tab{font-size:12px;font-weight:700;padding:10px 22px;border-radius:100px;border:1.5px solid var(--border);color:var(--text-lo);background:transparent;cursor:pointer;transition:all .2s;}
+.how-tab.active{background:var(--blue-lt);border-color:var(--blue-mid);color:var(--blue);}
+.how-panel{display:none;}
+.how-panel.active{display:grid;grid-template-columns:repeat(4,1fr);gap:0;}
+.step{padding:32px 24px;border-right:1px solid var(--border);}
+.step:last-child{border-right:none;}
+.step-num{font-family:var(--mono);font-size:11px;color:var(--text-lo);letter-spacing:1px;margin-bottom:20px;display:flex;align-items:center;gap:8px;}
+.step-num::after{content:'';flex:1;height:1px;background:var(--border);}
+.step-icon{font-size:28px;margin-bottom:14px;}
+.step-title{font-size:14px;font-weight:700;color:var(--text-hi);margin-bottom:8px;line-height:1.4;}
+.step-desc{font-size:12px;color:var(--text-md);line-height:1.8;}
+
+/* PRIVACY */
+.privacy{padding:80px;background:var(--bg-dark);display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.priv-h2{font-family:var(--serif);font-size:clamp(30px,3.5vw,50px);font-weight:300;line-height:1.1;color:#fff;margin-bottom:16px;}
+.priv-h2 em{font-style:italic;color:#98D4CE;}
+.priv-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:3px;color:rgba(255,255,255,.3);text-transform:uppercase;margin-bottom:16px;}
+.priv-body{font-size:14px;line-height:2;color:rgba(255,255,255,.5);}
+.priv-right{display:flex;flex-direction:column;gap:14px;}
+.priv-item{display:flex;gap:16px;align-items:flex-start;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:20px;}
+.priv-item-icon{font-size:22px;flex-shrink:0;}
+.priv-item-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:4px;}
+.priv-item-desc{font-size:12px;color:rgba(255,255,255,.4);line-height:1.7;}
+
+/* COCOLO */
+.cocolo{padding:120px 80px;background:linear-gradient(160deg,#E8EEFA 0%,#F0ECFF 50%,#E4F6F4 100%);border-bottom:1px solid var(--border);}
+.cocolo-inner{max-width:760px;margin:0 auto;text-align:center;}
+.cocolo-h2{font-family:var(--serif);font-size:clamp(34px,4.5vw,60px);font-weight:300;line-height:1.1;letter-spacing:-.5px;color:var(--text-hi);margin-bottom:20px;}
+.cocolo-h2 em{font-style:italic;color:var(--lav);}
+.cocolo-body{font-size:14px;line-height:2.1;color:var(--text-md);margin-bottom:48px;}
+.cocolo-points{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;text-align:left;}
+.cp{background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.9);border-radius:18px;padding:22px;backdrop-filter:blur(8px);}
+.cp-icon{font-size:24px;margin-bottom:10px;}
+.cp-title{font-size:13px;font-weight:700;color:var(--text-hi);margin-bottom:6px;}
+.cp-desc{font-size:12px;color:var(--text-md);line-height:1.7;}
+
+/* CONTACT */
+.contact{padding:120px 80px;display:grid;grid-template-columns:1fr 1fr;gap:80px;border-bottom:1px solid var(--border);}
+.contact-h2{font-family:var(--serif);font-size:clamp(34px,4vw,56px);font-weight:300;line-height:1.1;letter-spacing:-.5px;color:var(--text-hi);margin-bottom:20px;}
+.contact-h2 em{font-style:italic;color:var(--mint);}
+.contact-body{font-size:14px;line-height:2;color:var(--text-md);margin-bottom:32px;}
+.contact-cards{display:flex;flex-direction:column;gap:12px;}
+.contact-card{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;padding:20px 24px;display:flex;align-items:center;gap:16px;transition:transform .2s,box-shadow .2s;cursor:pointer;}
+.contact-card:hover{transform:translateX(4px);box-shadow:0 8px 24px rgba(26,24,40,.07);}
+.cc-icon{font-size:24px;flex-shrink:0;}
+.cc-title{font-size:14px;font-weight:700;color:var(--text-hi);margin-bottom:2px;}
+.cc-desc{font-size:12px;color:var(--text-lo);}
+.cc-arrow{font-size:18px;color:var(--text-lo);margin-left:auto;}
+.form-wrap{background:var(--bg-card);border:1px solid var(--border);border-radius:24px;padding:36px;}
+.form-title{font-family:var(--serif);font-size:24px;color:var(--text-hi);margin-bottom:6px;}
+.form-sub{font-size:12px;color:var(--text-lo);margin-bottom:24px;}
+.form-row{margin-bottom:16px;}
+.form-label{font-size:11px;font-weight:700;color:var(--text-md);letter-spacing:.5px;margin-bottom:6px;display:block;}
+.form-input,.form-select,.form-textarea{width:100%;font-family:var(--sans);font-size:13px;background:var(--bg);border:1.5px solid var(--border);border-radius:12px;padding:12px 16px;color:var(--text-hi);transition:border-color .2s;outline:none;}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--mint);}
+.form-textarea{height:100px;resize:vertical;}
+.form-submit{width:100%;background:var(--mint);color:#fff;font-size:14px;font-weight:700;padding:16px;border-radius:14px;cursor:pointer;transition:all .22s;border:none;font-family:var(--sans);}
+.form-submit:hover{box-shadow:0 8px 24px rgba(86,176,168,.4);transform:translateY(-1px);}
+
+footer{padding:56px 80px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;}
+.footer-logo{font-family:var(--serif);font-size:20px;font-weight:600;letter-spacing:4px;}
+.footer-links{display:flex;gap:24px;}
+.footer-links a{font-size:11px;color:var(--text-lo);transition:color .2s;}
+.footer-links a:hover{color:var(--text-hi);}
+
+@media(max-width:1024px){
+  .hero{grid-template-columns:1fr;min-height:auto;padding:100px 24px 60px;}
+  .family-grid{grid-template-columns:1fr;}
+  .privacy{grid-template-columns:1fr;padding:60px 24px;}
+  .contact{grid-template-columns:1fr;padding:60px 24px;}
+}
+@media(max-width:900px){
+  nav{padding:0 20px;}
+  .crisis{grid-template-columns:1fr;padding:60px 24px;}
+  .crisis-stats{grid-template-columns:1fr;}
+  .features{padding:60px 24px;}
+  .features-grid{grid-template-columns:1fr;}
+  .family{padding:60px 24px;}
+  .how{padding:60px 24px;}
+  .how-panel.active{grid-template-columns:1fr 1fr;}
+  .step{border-right:none;border-bottom:1px solid var(--border);padding:24px;}
+  .cocolo{padding:60px 24px;}
+  .cocolo-points{grid-template-columns:1fr;}
+  footer{padding:32px 24px;flex-direction:column;align-items:flex-start;}
+}
+[data-lang="en"] .ja{display:none;}
+[data-lang="ja"] .en{display:none;}
+</style>
+</head>
+<body data-lang="ja">
+
+<nav>
+  <div style="display:flex;align-items:center;">
+    <a href="kokoro-site.html" class="nav-logo">KOKORO</a>
+    <span class="nav-badge"><span class="ja">教育・自治体向け</span><span class="en">FOR EDUCATION</span></span>
+  </div>
+  <div class="nav-right">
+    <button class="nav-lang" onclick="toggleLang()">EN / JA</button>
+    <a href="#contact" class="nav-cta"><span class="ja">お問い合わせ</span><span class="en">Contact Us</span></a>
+  </div>
+</nav>
+
+<!-- PILOT BANNER -->
+<div class="pilot-banner">
+  <p class="pilot-text">
+    <span class="ja">🧪 パイロット&プランニング中 — 教育・自治体向けの機能は現在<em>企画・パートナー募集</em>中です。お気軽にお問い合わせください。</span>
+    <span class="en">🧪 Planning & Pilot Program — We're actively planning educational & government features. Let's talk about bringing Kokoro to your community.</span>
+  </p>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-blob1"></div><div class="hero-blob2"></div>
+  <div>
+    <p class="hero-eyebrow"><span class="ja">文科省COCOLOプラン対応 ／ 教育委員会・自治体向け</span><span class="en">Aligned with MEXT COCOLO Plan — For Schools & Municipalities</span></p>
+    <h1 class="hero-h1">
+      <span class="ja">不登校対策を、<br><em>データで</em><br>裏付ける。</span>
+      <span class="en">Evidence-based<br><em>truancy prevention</em><br>at scale.</span>
+    </h1>
+    <p class="hero-sub">
+      <span class="ja">KokoroはCOCOLOプランの3つの柱「早期発見・学びの確保・関係機関連携」すべてに対応します。子どもの毎日1分の記録が、先生・カウンセラー・自治体が使えるウェルビーイングデータになります。</span>
+      <span class="en">Kokoro addresses all three pillars of MEXT's COCOLO Plan: early detection, securing learning continuity, and multi-agency coordination. Children's 1-minute daily logs become actionable wellbeing data for teachers, counselors, and municipalities.</span>
+    </p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary"><span class="ja">📩 資料請求・お問い合わせ</span><span class="en">📩 Request Info</span></a>
+      <a href="#how" class="btn-outline"><span class="ja">使い方を見る →</span><span class="en">See how it works →</span></a>
+    </div>
+  </div>
+  <div>
+    <div class="audience-tabs">
+      <button class="tab-btn active-school" onclick="switchTab(event,'school')"><span class="ja">🏫 学校・教育委員会</span><span class="en">🏫 Schools</span></button>
+      <button class="tab-btn" onclick="switchTab(event,'family')"><span class="ja">🏠 家族向け</span><span class="en">🏠 Families</span></button>
+      <button class="tab-btn" onclick="switchTab(event,'govt')"><span class="ja">🏛 自治体・行政</span><span class="en">🏛 Government</span></button>
+    </div>
+    <div class="audience-panel">
+      <div class="panel active" id="panel-school">
+        <div class="panel-icon">🏫</div>
+        <p class="panel-title"><span class="ja">学校・教育委員会の方へ</span><span class="en">For Schools & Boards</span></p>
+        <p class="panel-sub"><span class="ja">クラス全体の「こころの状態」を匿名で集計・可視化。先生の勘に頼らず、小さなSOSをデータで捉えます。</span><span class="en">Anonymously visualize the emotional state of an entire class. Catch small distress signals in data, not just intuition.</span></p>
+        <div class="panel-points">
+          <div class="panel-point"><div class="pp-dot dot-blue"></div><span><span class="ja">子どもが毎朝1分、今日のひかりを記録</span><span class="en">Students log their daily mood in 1 minute each morning</span></span></div>
+          <div class="panel-point"><div class="pp-dot dot-blue"></div><span><span class="ja">先生はクラス全体の傾向をダッシュボードで確認（個人情報なし）</span><span class="en">Teachers view class-wide trends — no personal data exposed</span></span></div>
+          <div class="panel-point"><div class="pp-dot dot-blue"></div><span><span class="ja">不登校になった子も、自宅から記録を続けられる</span><span class="en">Children who can't attend school can still log from home</span></span></div>
+        </div>
+      </div>
+      <div class="panel" id="panel-family">
+        <div class="panel-icon">🏠</div>
+        <p class="panel-title"><span class="ja">家族・保護者の方へ</span><span class="en">For Families & Parents</span></p>
+        <p class="panel-sub"><span class="ja">「今日どうだった？」より深い会話が生まれます。お互いのひかりを共有することで、言葉にしにくい気持ちをつなぎます。</span><span class="en">Richer conversations than "how was your day?" Sharing each other's light creates connection beyond words.</span></p>
+        <div class="panel-points">
+          <div class="panel-point"><div class="pp-dot dot-terra"></div><span><span class="ja">子どもが同意した範囲で、保護者が「今日のひかり」を見守れる</span><span class="en">With child consent, parents can see their child's daily light</span></span></div>
+          <div class="panel-point"><div class="pp-dot dot-terra"></div><span><span class="ja">AIが今日の声のかけ方をそっと提案してくれる</span><span class="en">AI gently suggests how to speak to your child today</span></span></div>
+          <div class="panel-point"><div class="pp-dot dot-terra"></div><span><span class="ja">夫婦・パートナーでお互いの気分をシェアして会話のきっかけに</span><span class="en">Couples share moods to spark deeper conversation</span></span></div>
+        </div>
+      </div>
+      <div class="panel" id="panel-govt">
+        <div class="panel-icon">🏛</div>
+        <p class="panel-title"><span class="ja">自治体・行政の方へ</span><span class="en">For Municipalities</span></p>
+        <p class="panel-sub"><span class="ja">地域単位の幸福度データを匿名・集計で提供。政策立案の根拠となるウェルビーイング指標を継続的に可視化します。</span><span class="en">Anonymous aggregate wellbeing data at the community level — continuous metrics for evidence-based policy.</span></p>
+        <div class="panel-points">
+          <div class="panel-point"><div class="pp-dot dot-mint"></div><span><span class="ja">地域の幸福度マップを匿名データで生成</span><span class="en">Generate anonymous regional happiness maps</span></span></div>
+          <div class="panel-point"><div class="pp-dot dot-mint"></div><span><span class="ja">文科省COCOLOプランとの連携に対応</span><span class="en">Compatible with MEXT's COCOLO Plan</span></span></div>
+          <div class="panel-point"><div class="pp-dot dot-mint"></div><span><span class="ja">自治体規模に応じたパイロット導入プランあり</span><span class="en">Pilot plans scaled to your municipality</span></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- POLICY LOGIC BANNER -->
+<div style="padding:56px 80px;border-bottom:1px solid var(--border);background:var(--bg-card);display:flex;align-items:center;gap:60px;flex-wrap:wrap;">
+  <div style="flex:1;min-width:280px;">
+    <p style="font-family:var(--mono);font-size:10px;letter-spacing:3px;color:var(--mint);text-transform:uppercase;margin-bottom:14px;"><span class="ja">COCOLOプランとの対応関係</span><span class="en">How Kokoro Maps to COCOLO</span></p>
+    <p style="font-family:var(--serif);font-size:clamp(20px,2.5vw,30px);font-weight:300;line-height:1.4;color:var(--text-hi);">
+      <span class="ja">政策の3本柱を、<br>1つのアプリで<br>継続的に実装できる。</span>
+      <span class="en">All three policy pillars,<br>implemented continuously<br>through one app.</span>
+    </p>
+  </div>
+  <div style="flex:2;min-width:280px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+    <div style="padding:20px;background:var(--mint-lt);border:1px solid var(--mint-mid);border-radius:16px;">
+      <p style="font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--mint);text-transform:uppercase;margin-bottom:8px;">COCOLO 柱①</p>
+      <p style="font-size:13px;font-weight:700;color:var(--text-hi);margin-bottom:6px;"><span class="ja">早期発見・早期対応</span><span class="en">Early Detection</span></p>
+      <p style="font-size:11px;color:var(--text-md);line-height:1.7;"><span class="ja">3日連続低スコアでカウンセラーへ自動通知。クラス単位の傾向ダッシュボード。</span><span class="en">Auto-alert to counselor after 3 consecutive low scores. Class-level trend dashboard.</span></p>
+    </div>
+    <div style="padding:20px;background:var(--blue-lt);border:1px solid var(--blue-mid);border-radius:16px;">
+      <p style="font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--blue);text-transform:uppercase;margin-bottom:8px;">COCOLO 柱②</p>
+      <p style="font-size:13px;font-weight:700;color:var(--text-hi);margin-bottom:6px;"><span class="ja">学びの場の確保</span><span class="en">Learning Continuity</span></p>
+      <p style="font-size:11px;color:var(--text-md);line-height:1.7;"><span class="ja">不登校中も自宅から記録継続。先生との関係を切らさず、復帰への橋を維持。</span><span class="en">Children log from home during absence. Preserves the teacher relationship and path back.</span></p>
+    </div>
+    <div style="padding:20px;background:var(--lav-lt);border:1px solid var(--lav-mid);border-radius:16px;">
+      <p style="font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--lav);text-transform:uppercase;margin-bottom:8px;">COCOLO 柱③</p>
+      <p style="font-size:13px;font-weight:700;color:var(--text-hi);margin-bottom:6px;"><span class="ja">関係機関の連携</span><span class="en">Multi-Agency Coordination</span></p>
+      <p style="font-size:11px;color:var(--text-md);line-height:1.7;"><span class="ja">学校・家庭・自治体が同じ匿名データを共有。縦割りを超えたチーム支援を実現。</span><span class="en">Schools, families, and municipalities share the same anonymous data. Team support across silos.</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- CRISIS NUMBERS -->
+<div class="crisis">
+  <div>
+    <p class="crisis-label"><span class="ja">政策課題としての現状</span><span class="en">The policy challenge in numbers</span></p>
+    <h2 class="crisis-h2"><span class="ja">現場は今、<br><em>データなしに</em><br>判断している。</span><span class="en">Schools today make<br>critical decisions<br><em>without data.</em></span></h2>
+    <p class="crisis-note"><span class="ja">出典：文部科学省「令和6年度 児童生徒の問題行動・不登校等調査」</span><span class="en">Source: MEXT Survey, FY2024</span></p>
+  </div>
+  <div class="crisis-stats">
+    <div class="cstat">
+      <p class="cstat-num mint">35.4<span style="font-size:24px;">万</span></p>
+      <p class="cstat-label"><span class="ja">不登校児童生徒数（2024年度）<br>12年連続で過去最多更新</span><span class="en">Children refusing school FY2024<br>12 consecutive record highs</span></p>
+      <p class="cstat-source">MEXT 2024</p>
+    </div>
+    <div class="cstat">
+      <p class="cstat-num lav">77<span style="font-size:24px;">万件</span></p>
+      <p class="cstat-label"><span class="ja">いじめ認知件数<br>4年連続で過去最多</span><span class="en">Bullying cases recognized<br>4 consecutive record highs</span></p>
+      <p class="cstat-source">MEXT 2024</p>
+    </div>
+    <div class="cstat">
+      <p class="cstat-num terra">413<span style="font-size:24px;">人</span></p>
+      <p class="cstat-label"><span class="ja">2024年度に命を落とした子ども<br>これも過去最多</span><span class="en">Children who lost their lives FY2024<br>Also a record high</span></p>
+      <p class="cstat-source">MEXT 2024</p>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div class="features" id="features">
+  <p class="section-eyebrow ey-mint"><span class="ja">Kokoro Educationの機能</span><span class="en">Kokoro Education Features</span></p>
+  <h2 class="section-h2"><span class="ja">政策の言葉を、<br><em class="mint">現場のデータ</em>に変える。</span><span class="en">Turning policy goals<br>into <em class="mint">real-world data.</em></span></h2>
+  <p class="section-sub"><span class="ja">4つのタブ（ホーム・記録・振り返り・せかい）で子どもの心を育てるKokoroのプラットフォームを、教育・自治体向けに拡張。子どもの「毎日1分の記録」からCOCOLOプランが掲げる3つの柱を自動的に実装します。行政レポートに使えるデータ、先生の業務負担軽減、不登校の早期発見——すべてが一つのアプリから。</span><span class="en">Built on Kokoro's four-tab platform (Home, Record, Analysis, World), we've expanded it for education and municipalities. Children's daily 1-minute logs automatically implement COCOLO's three pillars: data for administrative reports, reduced teacher workload, early detection of truancy risk — all from one app.</span></p>
+  <div class="features-grid">
+    <div class="feat">
+      <span class="feat-icon">🏛</span>
+      <p class="feat-tag govt"><span class="ja">自治体・行政向け</span><span class="en">Municipality & Government</span></p>
+      <p class="feat-title"><span class="ja">COCOLOプラン対応の<br>定量レポート</span><span class="en">COCOLO-aligned quantitative reports</span></p>
+      <p class="feat-desc"><span class="ja">月次・四半期で地域・学校単位の匿名ウェルビーイングデータを提供。文科省報告書フォーマットに対応済み。政策立案・予算配分の根拠データとして即座に活用できます。</span><span class="en">Monthly and quarterly anonymous wellbeing data by school and municipality. Pre-formatted for MEXT reporting. Immediately usable as evidence for policy and budget decisions.</span></p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">🌤️</span>
+      <p class="feat-tag school"><span class="ja">教育委員会・学校向け</span><span class="en">Boards & Schools</span></p>
+      <p class="feat-title"><span class="ja">クラス傾向ダッシュボードで<br>先生の負担を軽減</span><span class="en">Class dashboard reduces teacher burden</span></p>
+      <p class="feat-desc"><span class="ja">クラス全員の記録を匿名集計し、傾向を一画面に表示。目視・直感に頼っていた状況把握をデータが補完。担任教師・管理職・教育委員会それぞれの権限に応じた閲覧設定あり。</span><span class="en">Anonymous class aggregates on one screen. Data supplements what used to rely on intuition and observation. Role-based access for class teachers, principals, and education boards.</span></p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">🔔</span>
+      <p class="feat-tag school"><span class="ja">学校・カウンセラー向け</span><span class="en">Schools & Counselors</span></p>
+      <p class="feat-title"><span class="ja">自動SOSアラートで<br>不登校を早期発見</span><span class="en">Automated SOS alerts for early truancy detection</span></p>
+      <p class="feat-desc"><span class="ja">3日以上ひかりが低値で推移した場合、スクールカウンセラーへ自動通知。早期介入のタイミングをデータが教えることで、カウンセラーの判断負担と見落としリスクを同時に下げます。</span><span class="en">3+ consecutive low-score days trigger an automatic counselor-only alert. Data surfaces the right timing for intervention — reducing both decision burden and the risk of missing a child in need.</span></p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">🏠</span>
+      <p class="feat-tag school"><span class="ja">不登校対応</span><span class="en">Truancy Support</span></p>
+      <p class="feat-title"><span class="ja">不登校中も記録継続、<br>学校とのつながりを維持</span><span class="en">Continuous logging during absence</span></p>
+      <p class="feat-desc"><span class="ja">登校できない期間も記録は継続。先生はダッシュボードで在宅生徒の状態変化を把握でき、自治体は不登校児のウェルビーイング変化を継続追跡できます。</span><span class="en">Logging continues during school absence. Teachers can track changes for at-home students. Municipalities can monitor wellbeing trajectories of children with truancy.</span></p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">🌕</span>
+      <p class="feat-tag school"><span class="ja">子ども向け — 介入効果の根拠</span><span class="en">Children — Evidence of Impact</span></p>
+      <p class="feat-title"><span class="ja">子ども自身の自己理解が<br>早期発見精度を高める</span><span class="en">Self-awareness improves detection accuracy</span></p>
+      <p class="feat-desc"><span class="ja">子どもが毎日正直に記録できるのは「誰にも見られない」という安心があるため。自発的で正確な記録が、データ精度を高め、結果として行政・現場への指標の信頼性を担保します。</span><span class="en">Children log honestly because their individual data is private. Voluntary, accurate self-reporting improves data quality — and in turn, the reliability of indicators for administrators and teachers.</span></p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">📈</span>
+      <p class="feat-tag school"><span class="ja">子ども向け — 副次効果</span><span class="en">Children — Secondary Effect</span></p>
+      <p class="feat-title"><span class="ja">こころのパターンへの気づきが<br>自己理解・レジリエンスを育てる</span><span class="en">Pattern awareness builds resilience</span></p>
+      <p class="feat-desc"><span class="ja">週・月単位でひかりの推移が可視化されることで、子ども自身がこころのパターンを発見。自己理解の習慣は、長期的なウェルビーイング向上と不登校再発予防にも寄与します。</span><span class="en">Weekly and monthly visualizations let children discover their own emotional patterns. Self-awareness habits contribute to long-term wellbeing improvement and prevention of truancy recurrence.</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- FAMILY DEEP -->
+<div class="family">
+  <div class="family-blob"></div>
+  <p class="section-eyebrow ey-terra" style="margin-bottom:20px;"><span class="ja">家族のつながり</span><span class="en">Family Connection</span></p>
+  <h2 class="section-h2" style="margin-bottom:16px;"><span class="ja">「今日どうだった？」の<br>その先へ。<em class="terra">こころで話す。</em></span><span class="en">Beyond "how was your day?"<br><em class="terra">Speak heart to heart.</em></span></h2>
+  <p class="section-sub"><span class="ja">子どもが自分のこころの状態を記録する習慣がつくと、「今日はどんな気分か」を自然に言葉にできるようになります。その言葉が、家族の会話を変えます。親子間だけでなく、夫婦間でも同じです。</span><span class="en">When children develop the habit of logging their inner state, they naturally become able to express how they feel. That language changes the conversation — between parent and child, and between partners too.</span></p>
+  <div class="family-grid">
+    <div class="family-scenarios">
+      <div class="scenario">
+        <div class="sc-header"><span class="sc-icon">👨‍👧</span><span class="sc-label"><span class="ja">親子</span><span class="en">Parent & Child</span></span></div>
+        <p class="sc-title"><span class="ja">子どもが「🌑消えそう」と記録した朝</span><span class="en">The morning a child logs "🌑 Fading"</span></p>
+        <p class="sc-desc"><span class="ja">保護者のアプリに静かに通知が届く。AIが「今日は距離をおいて、ただそばにいてあげるだけで良いかもしれません」と提案。怒らず、急かさず、ただそばにいる。</span><span class="en">A quiet notification reaches the parent. AI suggests: "Just being nearby without pushing might be enough today." No anger, no rushing — just presence.</span></p>
+        <p class="sc-quote"><span class="ja">「なんで学校行かないの？」ではなく、「今日は一緒にいるよ」へ。</span><span class="en">"Why won't you go?" becomes "I'm here with you today."</span></p>
+      </div>
+      <div class="scenario">
+        <div class="sc-header"><span class="sc-icon">💑</span><span class="sc-label"><span class="ja">夫婦・パートナー</span><span class="en">Couples</span></span></div>
+        <p class="sc-title"><span class="ja">仕事で疲れた夜、言葉にできない日</span><span class="en">An exhausted evening when words won't come</span></p>
+        <p class="sc-desc"><span class="ja">「今日は🌘かすかだった」とひかりを共有するだけで伝わる。パートナーは自然に「今日は静かな夜にしよう」と理解する。言葉にしなくていい、でもわかってもらえる。</span><span class="en">Sharing "🌘 Fading today" says everything. Your partner naturally understands: quiet evening tonight. You didn't have to explain — but you were understood.</span></p>
+        <p class="sc-quote"><span class="ja">日本人が最も苦手な「気持ちを伝えること」を、こころのスタンプが代わりにしてくれる。</span><span class="en">The heart stamp does what Japanese people find hardest — so you don't have to.</span></p>
+      </div>
+      <div class="scenario">
+        <div class="sc-header"><span class="sc-icon">🌟</span><span class="sc-label"><span class="ja">家族チャレンジ</span><span class="en">Family Challenge</span></span></div>
+        <p class="sc-title"><span class="ja">「今週みんなで✨かがやきを目指そう」</span><span class="en">"Let's all aim for ✨ Radiant this week"</span></p>
+        <p class="sc-desc"><span class="ja">家族全員で毎日、気分を記録する。親子で、夫婦で、祖父母と。一緒に「良い」「普通」「疲れ」から選ぶ時間が、家族のこころを一つにします。</span><span class="en">Every family member logs their mood together. Parent and child. Husband and wife. Grandparent and grandchild. Sharing this moment of honesty every day brings hearts closer.</span></p>
+        <p class="sc-quote"><span class="ja">「今日のあなたは？」が家族の合言葉になる。</span><span class="en">"How are you today?" becomes your family's daily ritual.</span></p>
+      </div>
+    </div>
+    <div class="family-mockup">
+      <div class="mockup-phone">
+        <div class="mp-notch"></div>
+        <div class="mp-screen">
+          <p class="mp-title">👨‍👩‍👧 FAMILY</p>
+          <div class="share-card">
+            <div class="sh-row"><div class="sh-avatar" style="background:#F0ECFF;">🌸</div><span class="sh-name">ママ</span></div>
+            <p class="sh-mood">🌕</p>
+            <p class="sh-text">あたたかい一日だったよ</p>
+            <p style="font-size:7px;color:#8870C8;font-family:var(--mono);margin-left:32px;margin-top:4px;">🪙 +5</p>
+          </div>
+          <div class="share-card">
+            <div class="sh-row"><div class="sh-avatar" style="background:#E4F6F4;">🌿</div><span class="sh-name">パパ</span></div>
+            <p class="sh-mood">🌘</p>
+            <p class="sh-text">今日は少し疲れた…</p>
+          </div>
+          <div class="share-card">
+            <div class="sh-row"><div class="sh-avatar" style="background:#FAECEA;">🦊</div><span class="sh-name">はな（9歳）</span></div>
+            <p class="sh-mood">🌔</p>
+            <p class="sh-text">まあまあかな</p>
+          </div>
+          <div class="ai-suggest">
+            <p class="ai-label">💡 AI より</p>
+            <p class="ai-text">パパは今日少し疲れているみたい。夕食後に静かな時間を一緒に過ごすのが良いかもしれません。</p>
+          </div>
+          <div style="background:rgba(136,112,200,.1);border-radius:10px;padding:8px;margin-top:8px;display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:7px;color:#8870C8;font-weight:700;">🌟 家族チャレンジ</span>
+            <span style="font-size:7px;color:#A09CC0;">3/7日目</span>
+          </div>
+        </div>
+      </div>
+      <div class="float-chips">
+        <div class="float-chip" style="color:var(--terra);">🌸 <span class="ja">今日のひかりをシェア</span><span class="en">Share today's light</span></div>
+        <div class="float-chip" style="color:var(--mint);">💡 <span class="ja">AIが声かけを提案</span><span class="en">AI suggests how to connect</span></div>
+        <div class="float-chip" style="color:var(--lav);">🪙 <span class="ja">家族チャレンジで絆を深める</span><span class="en">Deepen bonds with family challenges</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="how" id="how">
+  <p class="section-eyebrow ey-blue"><span class="ja">導入の流れ</span><span class="en">How It Works</span></p>
+  <h2 class="section-h2" style="margin-bottom:56px;"><span class="ja">シンプルに、<em class="blue">始められる。</em></span><span class="en">Simple enough to <em class="blue">start tomorrow.</em></span></h2>
+  <div class="how-tabs">
+    <button class="how-tab active" onclick="switchHow(event,'school')"><span class="ja">🏫 学校での導入</span><span class="en">🏫 School</span></button>
+    <button class="how-tab" onclick="switchHow(event,'family')"><span class="ja">🏠 家族での使い方</span><span class="en">🏠 Family</span></button>
+    <button class="how-tab" onclick="switchHow(event,'govt')"><span class="ja">🏛 自治体での導入</span><span class="en">🏛 Municipality</span></button>
+  </div>
+  <div class="how-panel active" id="how-school">
+    <div class="step"><p class="step-num">01</p><span class="step-icon">📋</span><p class="step-title"><span class="ja">パイロット申請</span><span class="en">Apply for Pilot</span></p><p class="step-desc"><span class="ja">1クラス・1校からでも導入可能。無料トライアルあり。まずはお問い合わせください。</span><span class="en">Start with one class or school. Free trial available. Just reach out.</span></p></div>
+    <div class="step"><p class="step-num">02</p><span class="step-icon">📱</span><p class="step-title"><span class="ja">アプリ設定（15分）</span><span class="en">Setup in 15 minutes</span></p><p class="step-desc"><span class="ja">子どもはKokoro Kids、先生はTeacherダッシュボードを設定。15分で完了します。</span><span class="en">Children set up Kokoro Kids. Teachers configure the dashboard. 15 minutes total.</span></p></div>
+    <div class="step"><p class="step-num">03</p><span class="step-icon">☀️</span><p class="step-title"><span class="ja">毎朝1分の記録スタート</span><span class="en">1-minute morning log</span></p><p class="step-desc"><span class="ja">朝のホームルーム前後1分、今日のひかりを押すだけ。日記は任意。</span><span class="en">One minute around morning homeroom. Tap today's light. Diary is optional.</span></p></div>
+    <div class="step"><p class="step-num">04</p><span class="step-icon">📊</span><p class="step-title"><span class="ja">ダッシュボードで見守る</span><span class="en">Monitor via dashboard</span></p><p class="step-desc"><span class="ja">クラス全体の傾向が一目で分かる。SOSアラートが届いたらカウンセラーと連携。</span><span class="en">Class trends at a glance. When SOS alerts arrive, loop in the counselor.</span></p></div>
+  </div>
+  <div class="how-panel" id="how-family">
+    <div class="step"><p class="step-num">01</p><span class="step-icon">📲</span><p class="step-title"><span class="ja">アプリをダウンロード</span><span class="en">Download the apps</span></p><p class="step-desc"><span class="ja">大人はKokoro、子どもはKokoro Kidsを。App Storeから無料でダウンロード。</span><span class="en">Adults use Kokoro, children use Kokoro Kids. Free on App Store.</span></p></div>
+    <div class="step"><p class="step-num">02</p><span class="step-icon">🔗</span><p class="step-title"><span class="ja">ファミリーグループを作成</span><span class="en">Create a family group</span></p><p class="step-desc"><span class="ja">招待コードを共有するだけ。子どもが「共有したい」と選んだ情報だけが見えます。</span><span class="en">Share an invite code. Only what each child chooses to share is visible.</span></p></div>
+    <div class="step"><p class="step-num">03</p><span class="step-icon">🌕</span><p class="step-title"><span class="ja">毎日のひかりをシェア</span><span class="en">Share daily light</span></p><p class="step-desc"><span class="ja">今日のひかりを記録したら、家族に見せる設定をオン。「今日どう？」の代わりに。</span><span class="en">After logging, turn on family sharing. Instead of asking "how are you?"</span></p></div>
+    <div class="step"><p class="step-num">04</p><span class="step-icon">💬</span><p class="step-title"><span class="ja">AIの提案で会話が変わる</span><span class="en">AI changes the conversation</span></p><p class="step-desc"><span class="ja">子どもの状態に合わせた声かけをAIがサポート。家族チャレンジで一緒に楽しむ。</span><span class="en">AI supports conversation starters. Family challenges add joy and togetherness.</span></p></div>
+  </div>
+  <div class="how-panel" id="how-govt">
+    <div class="step"><p class="step-num">01</p><span class="step-icon">🤝</span><p class="step-title"><span class="ja">パートナーシップ相談</span><span class="en">Partnership consultation</span></p><p class="step-desc"><span class="ja">自治体の規模・目的に応じたプランをご提案。まずは無料相談から。</span><span class="en">Plans matched to your municipality. Start with a free consultation.</span></p></div>
+    <div class="step"><p class="step-num">02</p><span class="step-icon">🏫</span><p class="step-title"><span class="ja">対象校・地域の設定</span><span class="en">Define target areas</span></p><p class="step-desc"><span class="ja">パイロット対象の学校・地域を設定。個人情報は一切含みません。</span><span class="en">Define pilot schools and areas. No personal data included — ever.</span></p></div>
+    <div class="step"><p class="step-num">03</p><span class="step-icon">📈</span><p class="step-title"><span class="ja">月次レポートで継続追跡</span><span class="en">Monthly tracking reports</span></p><p class="step-desc"><span class="ja">月次レポートで地域の幸福度トレンドを提供。政策立案の根拠データとして活用。</span><span class="en">Monthly reports on regional happiness trends for evidence-based policy.</span></p></div>
+    <div class="step"><p class="step-num">04</p><span class="step-icon">🌏</span><p class="step-title"><span class="ja">COCOLOプランとの連携</span><span class="en">COCOLO Plan alignment</span></p><p class="step-desc"><span class="ja">文科省COCOLOプランに沿った報告書フォーマットを提供。国への報告にも活用可能。</span><span class="en">Report templates aligned with MEXT's COCOLO Plan for national reporting.</span></p></div>
+  </div>
+</div>
+
+<!-- PRIVACY -->
+<div class="privacy">
+  <div>
+    <p class="priv-eyebrow"><span class="ja">プライバシーへの約束</span><span class="en">Our Privacy Promise</span></p>
+    <h2 class="priv-h2"><span class="ja">子どものこころのデータは、<br><em>子どものもの。</em></span><span class="en">A child's heart data<br>belongs to the <em>child.</em></span></h2>
+    <p class="priv-body"><span class="ja">Kokoroが教育機関・自治体と連携する上で、絶対に曲げない原則があります。子どもの個人データは誰にも見えない。集計データだけが、支援のために使われる。</span><span class="en">There is one principle we will never compromise: no individual child's data is visible to anyone. Only anonymous aggregates — and only to support.</span></p>
+  </div>
+  <div class="priv-right">
+    <div class="priv-item"><span class="priv-item-icon">🔒</span><div><p class="priv-item-title"><span class="ja">個人データは端末内に保存</span><span class="en">Individual data stays on-device</span></p><p class="priv-item-desc"><span class="ja">日記・気分記録はサーバーに送信しません。先生・保護者・自治体に見えるのは匿名の集計値のみ。</span><span class="en">Diary entries and mood logs never leave the device. Only anonymous aggregates are shared.</span></p></div></div>
+    <div class="priv-item"><span class="priv-item-icon">🙋</span><div><p class="priv-item-title"><span class="ja">子どもの同意が最優先</span><span class="en">Child consent comes first</span></p><p class="priv-item-desc"><span class="ja">ファミリー共有・学校連携は、子ども自身が「共有する」を選んで初めて有効になります。強制できません。</span><span class="en">Family sharing and school connection only activate when the child actively chooses to share. It cannot be forced.</span></p></div></div>
+    <div class="priv-item"><span class="priv-item-icon">🚫</span><div><p class="priv-item-title"><span class="ja">広告への利用は永久にしない</span><span class="en">Never used for advertising — ever</span></p><p class="priv-item-desc"><span class="ja">子どものこころの記録が広告に使われることは、Kokoroの存在理由に反します。永久に行いません。</span><span class="en">Using a child's emotional records for advertising contradicts Kokoro's reason for existing. This will never happen.</span></p></div></div>
+    <div class="priv-item"><span class="priv-item-icon">🗑️</span><div><p class="priv-item-title"><span class="ja">いつでも完全削除できる</span><span class="en">Delete completely, anytime</span></p><p class="priv-item-desc"><span class="ja">子どもが記録を削除したい場合、すべての履歴を即座に完全削除できます。</span><span class="en">If a child wants to delete their records, all history is immediately and completely erased.</span></p></div></div>
+  </div>
+</div>
+
+<!-- COCOLO PLAN -->
+<div class="cocolo">
+  <div class="cocolo-inner">
+    <p class="section-eyebrow ey-lav" style="justify-content:center;"><span class="ja">国の政策との連携</span><span class="en">National Policy Alignment</span></p>
+    <h2 class="cocolo-h2"><span class="ja">文科省<em>COCOLOプラン</em>に<br>対応しています。</span><span class="en">Aligned with MEXT's<br><em>COCOLO Plan.</em></span></h2>
+    <p class="cocolo-body"><span class="ja">文部科学省が2023年に発表した「誰一人取り残されない学びの保障に向けた不登校対策（COCOLOプラン）」は、こどものSOSの早期発見、学びの場の確保、保護者・学校・地域の連携を柱としています。KokoroのEducationプランはこの3つすべてに対応します。</span><span class="en">MEXT's 2023 COCOLO Plan centers on early SOS detection, securing learning opportunities, and connecting families, schools, and communities. Kokoro Education addresses all three pillars.</span></p>
+    <div class="cocolo-points">
+      <div class="cp"><div class="cp-icon">🔍</div><p class="cp-title"><span class="ja">早期発見・早期対応</span><span class="en">Early detection & response</span></p><p class="cp-desc"><span class="ja">毎日のひかり記録とSOSアラートで、先生とカウンセラーが早期に気づける仕組みを提供。</span><span class="en">Daily light logs and SOS alerts give teachers and counselors tools for early awareness.</span></p></div>
+      <div class="cp"><div class="cp-icon">📚</div><p class="cp-title"><span class="ja">学びの場の確保</span><span class="en">Securing learning continuity</span></p><p class="cp-desc"><span class="ja">不登校の子も自宅からKokoroでつながれ、学校・先生との関係を維持できます。</span><span class="en">Children who can't attend school stay connected to their teacher through Kokoro from home.</span></p></div>
+      <div class="cp"><div class="cp-icon">🤝</div><p class="cp-title"><span class="ja">関係機関の連携</span><span class="en">Multi-agency collaboration</span></p><p class="cp-desc"><span class="ja">学校・家庭・自治体が匿名データを通じて連携。チームで子どもを見守る体制を支援。</span><span class="en">Schools, families, and municipalities collaborate through anonymous data for team-based care.</span></p></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact" id="contact">
+  <div>
+    <p class="section-eyebrow ey-mint"><span class="ja">お問い合わせ</span><span class="en">Get in Touch</span></p>
+    <h2 class="contact-h2"><span class="ja">まず、話を<br><em>聞かせてください。</em></span><span class="en">Start with<br>a <em>conversation.</em></span></h2>
+    <p class="contact-body"><span class="ja">1校からでも、1クラスからでも始められます。無料のパイロット期間をご用意しています。まずはお気軽にご相談ください。</span><span class="en">Start with one class or one school. We offer a free pilot period. Just reach out and let's talk.</span></p>
+    <div class="contact-cards">
+      <div class="contact-card"><span class="cc-icon">🏫</span><div><p class="cc-title"><span class="ja">学校・教育委員会の方</span><span class="en">Schools & Education Boards</span></p><p class="cc-desc"><span class="ja">無料パイロット・資料請求</span><span class="en">Free pilot & materials</span></p></div><span class="cc-arrow">→</span></div>
+      <div class="contact-card"><span class="cc-icon">🏛</span><div><p class="cc-title"><span class="ja">自治体・行政の方</span><span class="en">Municipalities & Government</span></p><p class="cc-desc"><span class="ja">パートナーシップ相談</span><span class="en">Partnership consultation</span></p></div><span class="cc-arrow">→</span></div>
+      <div class="contact-card"><span class="cc-icon">🏠</span><div><p class="cc-title"><span class="ja">保護者・個人の方</span><span class="en">Parents & Individuals</span></p><p class="cc-desc"><span class="ja">ファミリー機能について</span><span class="en">About family features</span></p></div><span class="cc-arrow">→</span></div>
+    </div>
+  </div>
+  <div class="form-wrap">
+    <p class="form-title"><span class="ja">お問い合わせフォーム</span><span class="en">Contact Form</span></p>
+    <p class="form-sub"><span class="ja">通常2営業日以内にご返信いたします</span><span class="en">We respond within 2 business days</span></p>
+    <div class="form-row"><label class="form-label"><span class="ja">お名前</span><span class="en">Name</span></label><input class="form-input" type="text" placeholder="山田 太郎 / Taro Yamada"/></div>
+    <div class="form-row"><label class="form-label"><span class="ja">所属・学校名</span><span class="en">Organization / School</span></label><input class="form-input" type="text" placeholder="○○市立○○小学校"/></div>
+    <div class="form-row"><label class="form-label"><span class="ja">メールアドレス</span><span class="en">Email</span></label><input class="form-input" type="email" placeholder="taro@school.ed.jp"/></div>
+    <div class="form-row">
+      <label class="form-label"><span class="ja">お問い合わせ種別</span><span class="en">Inquiry type</span></label>
+      <select class="form-select">
+        <option>学校・教育委員会 — パイロット導入</option>
+        <option>自治体・行政 — パートナーシップ</option>
+        <option>保護者 — ファミリー機能について</option>
+        <option>その他</option>
+      </select>
+    </div>
+    <div class="form-row"><label class="form-label"><span class="ja">メッセージ</span><span class="en">Message</span></label><textarea class="form-textarea" placeholder="導入を検討している規模、現在の課題などをお聞かせください"></textarea></div>
+    <button class="form-submit"><span class="ja">送信する →</span><span class="en">Send →</span></button>
+  </div>
+</div>
+
+<footer>
+  <a href="kokoro-site.html" class="footer-logo">KOKORO</a>
+  <p style="font-size:11px;color:var(--text-lo);">© 2026 Kokoro Inc.</p>
+  <div class="footer-links">
+    <a href="kokoro-site.html"><span class="ja">トップ</span><span class="en">Home</span></a>
+    <a href="kokoro-appstore.html"><span class="ja">アプリ</span><span class="en">App</span></a>
+    <a href="kokoro-about.html"><span class="ja">会社概要</span><span class="en">About</span></a>
+    <a href="#"><span class="ja">プライバシー</span><span class="en">Privacy</span></a>
+  </div>
+</footer>
+
+<script>
+function toggleLang(){document.body.dataset.lang=document.body.dataset.lang==='ja'?'en':'ja';}
+function switchTab(e,tab){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active-school','active-family','active-govt'));
+  document.getElementById('panel-'+tab).classList.add('active');
+  e.target.closest('.tab-btn').classList.add('active-'+tab);
+}
+function switchHow(e,tab){
+  document.querySelectorAll('.how-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.how-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('how-'+tab).classList.add('active');
+  e.target.closest('.how-tab').classList.add('active');
+}
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';}});},{threshold:.08});
+document.querySelectorAll('.feat,.cstat,.cp,.priv-item,.scenario,.contact-card').forEach(el=>{
+  el.style.opacity='0';el.style.transform='translateY(20px)';
+  el.style.transition='opacity .6s ease,transform .6s ease';
+  obs.observe(el);
+});
+</script>
+</body>
+</html>
