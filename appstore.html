@@ -342,8 +342,12 @@ footer{
 <body data-lang="ja">
 
 <nav>
-  <a href="index.html" class="nav-back">← <span class="ja">トップに戻る</span><span class="en">Back to top</span></a>
-  <a href="#" class="nav-logo">KOKORO</a>
+  <a href="index.html" class="nav-logo">KOKORO</a>
+  <div class="nav-links" style="display:flex;gap:32px;">
+    <a href="index.html"><span class="ja">トップ</span><span class="en">Home</span></a>
+    <a href="about.html"><span class="ja">会社概要</span><span class="en">About</span></a>
+    <a href="education.html"><span class="ja">自治体向け</span><span class="en">Education</span></a>
+  </div>
   <div style="display:flex;gap:12px;align-items:center;">
     <button class="nav-lang-btn" style="font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--text-lo);border:1px solid var(--border);padding:5px 12px;border-radius:100px;background:transparent;cursor:pointer;" onclick="toggleLang()">EN / JA</button>
     <a href="#download" class="nav-dl">

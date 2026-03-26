@@ -149,15 +149,35 @@ nav {
   border-radius:50%;
 }
 @keyframes glowPulse{0%,100%{transform:scale(1);opacity:.7;}50%{transform:scale(1.1);opacity:1;}}
-.phone-frame {
-  width:270px;border-radius:36px;
+/* ── Device frame (education-style phone mockup) ── */
+.device-frame {
+  width:270px;background:var(--bg-dark);border-radius:36px;
+  border:6px solid #243050;overflow:hidden;position:relative;
   box-shadow:0 48px 96px rgba(26,40,64,.35),0 0 0 1px rgba(255,255,255,.08);
-  overflow:hidden;position:relative;
 }
-.phone-screenshot {
+.device-notch {
+  position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:72px;height:20px;background:#243050;
+  border-radius:0 0 14px 14px;z-index:10;
+}
+.device-screen {
+  width:100%;height:100%;overflow:hidden;
+}
+.device-screen img {
   width:100%;height:auto;display:block;
 }
-/* (removed old CSS mockup styles — now using real screenshots) */
+/* Feature card device frames */
+.feat-device {
+  width:220px;background:var(--bg-dark);border-radius:32px;
+  border:5px solid #243050;overflow:hidden;position:relative;
+  box-shadow:0 24px 60px rgba(26,40,64,.25);
+}
+.feat-device .device-notch {
+  width:60px;height:16px;border-radius:0 0 10px 10px;
+}
+.feat-device .device-screen img {
+  width:100%;height:auto;display:block;
+}
 
 /* Floating chips */
 .float-chip {
@@ -289,8 +309,7 @@ nav {
 }
 .feat-ja{font-size:11px;color:var(--text-lo);letter-spacing:1.5px;margin-bottom:18px;}
 .feat-desc{font-size:13px;line-height:1.95;color:var(--text-md);}
-.feat-phone{display:flex;justify-content:center;}
-.feat-screenshot{max-height:420px;width:auto;border-radius:14px;box-shadow:0 12px 36px rgba(26,40,64,.12);}
+.feat-phone{display:flex;justify-content:center;align-items:center;}
 
 /* ══ WORLD — journey ══ */
 .journey-path{margin-top:64px;position:relative;}
@@ -439,7 +458,8 @@ footer {
   .features{padding:80px 28px;}
   .feat-card{grid-template-columns:1fr !important;direction:ltr !important;padding:28px;}
   .feat-card > *{direction:ltr !important;}
-  .feat-screenshot{max-height:320px;}
+  .feat-device{width:180px;}
+  .device-frame{width:220px;}
   .world-section{padding:80px 28px;}
   .world-stages{grid-template-columns:1fr 1fr;}
   .notify-section{padding:80px 28px;}
@@ -458,12 +478,12 @@ footer {
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">KOKORO</a>
+  <a href="index.html" class="nav-logo">KOKORO</a>
   <div class="nav-center">
-    <a href="#philosophy"><span class="ja">哲学</span><span class="en">Philosophy</span></a>
     <a href="#features"><span class="ja">機能</span><span class="en">Features</span></a>
-    <a href="#world"><span class="ja">せかい</span><span class="en">World</span></a>
-    <a href="#notify"><span class="ja">事前登録</span><span class="en">Sign Up</span></a>
+    <a href="about.html"><span class="ja">会社概要</span><span class="en">About</span></a>
+    <a href="education.html"><span class="ja">自治体向け</span><span class="en">Education</span></a>
+    <a href="appstore.html"><span class="ja">アプリ</span><span class="en">App Store</span></a>
   </div>
   <div class="nav-right">
     <button class="nav-lang-btn" onclick="toggleLang()">EN / JA</button>
@@ -508,8 +528,9 @@ footer {
   <div class="hero-visual">
     <div class="phone-outer">
       <div class="phone-glow"></div>
-      <div class="phone-frame">
-        <img src="home.png" alt="Kokoro Home Screen" class="phone-screenshot"/>
+      <div class="device-frame">
+        <div class="device-notch"></div>
+        <div class="device-screen"><img src="home.png" alt="Kokoro Home Screen"/></div>
       </div>
       <div class="float-chip fc1">🌸 <span class="ja">つながり型</span><span class="en">Connection type</span></div>
       <div class="float-chip fc2">✨ <span class="ja">毎日のご褒美</span><span class="en">Daily sparkles</span></div>
@@ -589,7 +610,7 @@ footer {
         <p class="feat-ja"><span class="ja">ホーム</span><span class="en">ホーム</span></p>
         <p class="feat-desc"><span class="ja">今日のあなたのこころの状態を一目で。幸福度スコア、あなたのこころタイプ、各要素のスコア、そしてAIが提案する今日のアクション。毎日の変化を感じます。</span><span class="en">See your heart at a glance. Today's happiness score, your Kokoro type, factor analysis, and AI-suggested actions to nurture what matters most.</span></p>
       </div>
-      <div class="feat-phone"><img src="home.png" alt="Kokoro Home Screen" class="feat-screenshot"/></div>
+      <div class="feat-phone"><div class="feat-device"><div class="device-notch"></div><div class="device-screen"><img src="home.png" alt="Kokoro Home Screen"/></div></div></div>
     </div>
     <div class="feat-card c-blue">
       <div class="feat-text">
@@ -598,7 +619,7 @@ footer {
         <p class="feat-ja"><span class="ja">記録</span><span class="en">記録</span></p>
         <p class="feat-desc"><span class="ja">毎日の幸福度（0-100）、気分（元気/まあまあ/つかれた）、4つの要素のドット評価、できたこと日記、CBT思考記録。あなたのこころの内側を丁寧に記録します。</span><span class="en">Daily happiness slider, mood check, factor ratings, accomplishment journal, and CBT thought recording. Capture your inner world with depth and care.</span></p>
       </div>
-      <div class="feat-phone"><img src="record.png" alt="Kokoro Record Screen" class="feat-screenshot"/></div>
+      <div class="feat-phone"><div class="feat-device"><div class="device-notch"></div><div class="device-screen"><img src="record.png" alt="Kokoro Record Screen"/></div></div></div>
     </div>
     <div class="feat-card c-mint">
       <div class="feat-text">
@@ -607,7 +628,7 @@ footer {
         <p class="feat-ja"><span class="ja">振り返り</span><span class="en">振り返り</span></p>
         <p class="feat-desc"><span class="ja">週間の幸福度グラフ、月間カレンダー、週間の洞察、パターン分析。あなたのこころが何に満たされるのかが、時間とともに見えてきます。</span><span class="en">Weekly happiness chart, monthly calendar view, weekly insights, and pattern analysis. Discover what truly makes your heart flourish.</span></p>
       </div>
-      <div class="feat-phone"><img src="analysis.png" alt="Kokoro Analysis Screen" class="feat-screenshot"/></div>
+      <div class="feat-phone"><div class="feat-device"><div class="device-notch"></div><div class="device-screen"><img src="analysis.png" alt="Kokoro Analysis Screen"/></div></div></div>
     </div>
     <div class="feat-card c-lav">
       <div class="feat-text">
@@ -616,7 +637,7 @@ footer {
         <p class="feat-ja"><span class="ja">せかい</span><span class="en">せかい</span></p>
         <p class="feat-desc"><span class="ja">あなたのこころを表すドラッグ可能なマスコットたちが暮らすバーチャルルーム。庭を育て、キャラクターを集め、あなたの心の風景を自由に作り上げます。</span><span class="en">Your virtual heart's room. Arrange mascots, grow a garden, and create your own heart's landscape. A living reflection of your inner world.</span></p>
       </div>
-      <div class="feat-phone"><img src="world.png" alt="Kokoro World Screen" class="feat-screenshot"/></div>
+      <div class="feat-phone"><div class="feat-device"><div class="device-notch"></div><div class="device-screen"><img src="world.png" alt="Kokoro World Screen"/></div></div></div>
     </div>
   </div>
 </section>
