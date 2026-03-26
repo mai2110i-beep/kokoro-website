@@ -260,15 +260,19 @@ nav {
 .features .section-h2 em{color:var(--lav);}
 
 .features-grid {
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:18px;margin-top:64px;
+  display:flex;flex-direction:column;
+  gap:48px;margin-top:64px;
 }
 .feat-card {
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:48px;align-items:center;
   background:var(--bg-card);border:1px solid var(--border);
-  border-radius:24px;padding:36px 28px;
+  border-radius:24px;padding:48px;
   position:relative;overflow:hidden;
   transition:transform .22s,box-shadow .22s;
 }
+.feat-card:nth-child(even){direction:rtl;}
+.feat-card:nth-child(even) > *{direction:ltr;}
 .feat-card:hover{transform:translateY(-5px);box-shadow:0 20px 56px rgba(26,40,64,.09);}
 .feat-card::after {
   content:'';position:absolute;top:0;left:0;right:0;height:3px;
@@ -277,14 +281,16 @@ nav {
 .feat-card.c-blue::after{background:linear-gradient(90deg,var(--blue),var(--lav));}
 .feat-card.c-lav::after{background:linear-gradient(90deg,var(--lav),var(--mint));}
 .feat-card.c-mint::after{background:linear-gradient(90deg,var(--mint),var(--blue));}
+.feat-text{}
 .feat-icon{font-size:36px;margin-bottom:22px;display:block;}
 .feat-en {
-  font-family:var(--serif);font-size:22px;font-weight:400;
+  font-family:var(--serif);font-size:26px;font-weight:400;
   color:var(--text-hi);margin-bottom:4px;line-height:1.2;
 }
 .feat-ja{font-size:11px;color:var(--text-lo);letter-spacing:1.5px;margin-bottom:18px;}
 .feat-desc{font-size:13px;line-height:1.95;color:var(--text-md);}
-.feat-screenshot{width:100%;border-radius:14px;margin-top:20px;box-shadow:0 6px 20px rgba(26,40,64,.1);}
+.feat-phone{display:flex;justify-content:center;}
+.feat-screenshot{max-height:420px;width:auto;border-radius:14px;box-shadow:0 12px 36px rgba(26,40,64,.12);}
 
 /* ══ WORLD — journey ══ */
 .journey-path{margin-top:64px;position:relative;}
@@ -316,7 +322,7 @@ nav {
   font-weight:300;line-height:1.15;color:var(--text-hi);margin-bottom:16px;
 }
 .mascot-desc{font-size:13px;line-height:2;color:var(--text-md);max-width:560px;}
-.mascot-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:32px;}
+.mascot-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:32px;}
 .mascot-card{
   background:rgba(255,255,255,.8);border:1.5px solid rgba(255,255,255,.9);
   border-radius:20px;padding:24px 16px 20px;text-align:center;
@@ -324,7 +330,8 @@ nav {
 }
 .mascot-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(26,40,64,.1);}
 .mascot-card.active{border-color:var(--lav-mid);background:rgba(240,236,255,.8);}
-.mascot-emoji{font-size:44px;margin-bottom:12px;display:block;}
+.mascot-emoji{margin-bottom:12px;display:block;}
+.mascot-emoji img{width:80px;height:80px;object-fit:contain;}
 .mascot-name{font-family:var(--serif);font-size:17px;color:var(--text-hi);margin-bottom:4px;}
 .mascot-type{font-size:10px;color:var(--text-lo);line-height:1.6;margin-bottom:12px;}
 .mascot-status{
@@ -430,7 +437,9 @@ footer {
   .philosophy{padding:80px 28px;}
   .phil-grid{grid-template-columns:1fr;gap:40px;}
   .features{padding:80px 28px;}
-  .features-grid{grid-template-columns:1fr;}
+  .feat-card{grid-template-columns:1fr !important;direction:ltr !important;padding:28px;}
+  .feat-card > *{direction:ltr !important;}
+  .feat-screenshot{max-height:320px;}
   .world-section{padding:80px 28px;}
   .world-stages{grid-template-columns:1fr 1fr;}
   .notify-section{padding:80px 28px;}
@@ -574,32 +583,40 @@ footer {
   </h2>
   <div class="features-grid">
     <div class="feat-card c-lav">
-      <span class="feat-icon">🏠</span>
-      <p class="feat-en"><span class="ja">ホーム</span><span class="en">Home</span></p>
-      <p class="feat-ja"><span class="ja">ホーム</span><span class="en">ホーム</span></p>
-      <p class="feat-desc"><span class="ja">今日のあなたのこころの状態を一目で。幸福度スコア、あなたのこころタイプ、各要素のスコア、そしてAIが提案する今日のアクション。毎日の変化を感じます。</span><span class="en">See your heart at a glance. Today's happiness score, your Kokoro type, factor analysis, and AI-suggested actions to nurture what matters most.</span></p>
-      <img src="home.png" alt="Kokoro Home Screen" class="feat-screenshot"/>
+      <div class="feat-text">
+        <span class="feat-icon">🏠</span>
+        <p class="feat-en"><span class="ja">ホーム</span><span class="en">Home</span></p>
+        <p class="feat-ja"><span class="ja">ホーム</span><span class="en">ホーム</span></p>
+        <p class="feat-desc"><span class="ja">今日のあなたのこころの状態を一目で。幸福度スコア、あなたのこころタイプ、各要素のスコア、そしてAIが提案する今日のアクション。毎日の変化を感じます。</span><span class="en">See your heart at a glance. Today's happiness score, your Kokoro type, factor analysis, and AI-suggested actions to nurture what matters most.</span></p>
+      </div>
+      <div class="feat-phone"><img src="home.png" alt="Kokoro Home Screen" class="feat-screenshot"/></div>
     </div>
     <div class="feat-card c-blue">
-      <span class="feat-icon">📝</span>
-      <p class="feat-en"><span class="ja">記録</span><span class="en">Record</span></p>
-      <p class="feat-ja"><span class="ja">記録</span><span class="en">記録</span></p>
-      <p class="feat-desc"><span class="ja">毎日の幸福度（0-100）、気分（元気/まあまあ/つかれた）、4つの要素のドット評価、できたこと日記、CBT思考記録。あなたのこころの内側を丁寧に記録します。</span><span class="en">Daily happiness slider, mood check, factor ratings, accomplishment journal, and CBT thought recording. Capture your inner world with depth and care.</span></p>
-      <img src="record.png" alt="Kokoro Record Screen" class="feat-screenshot"/>
+      <div class="feat-text">
+        <span class="feat-icon">📝</span>
+        <p class="feat-en"><span class="ja">記録</span><span class="en">Record</span></p>
+        <p class="feat-ja"><span class="ja">記録</span><span class="en">記録</span></p>
+        <p class="feat-desc"><span class="ja">毎日の幸福度（0-100）、気分（元気/まあまあ/つかれた）、4つの要素のドット評価、できたこと日記、CBT思考記録。あなたのこころの内側を丁寧に記録します。</span><span class="en">Daily happiness slider, mood check, factor ratings, accomplishment journal, and CBT thought recording. Capture your inner world with depth and care.</span></p>
+      </div>
+      <div class="feat-phone"><img src="record.png" alt="Kokoro Record Screen" class="feat-screenshot"/></div>
     </div>
     <div class="feat-card c-mint">
-      <span class="feat-icon">📊</span>
-      <p class="feat-en"><span class="ja">振り返り</span><span class="en">Analysis</span></p>
-      <p class="feat-ja"><span class="ja">振り返り</span><span class="en">振り返り</span></p>
-      <p class="feat-desc"><span class="ja">週間の幸福度グラフ、月間カレンダー、週間の洞察、パターン分析。あなたのこころが何に満たされるのかが、時間とともに見えてきます。</span><span class="en">Weekly happiness chart, monthly calendar view, weekly insights, and pattern analysis. Discover what truly makes your heart flourish.</span></p>
-      <img src="analysis.png" alt="Kokoro Analysis Screen" class="feat-screenshot"/>
+      <div class="feat-text">
+        <span class="feat-icon">📊</span>
+        <p class="feat-en"><span class="ja">振り返り</span><span class="en">Analysis</span></p>
+        <p class="feat-ja"><span class="ja">振り返り</span><span class="en">振り返り</span></p>
+        <p class="feat-desc"><span class="ja">週間の幸福度グラフ、月間カレンダー、週間の洞察、パターン分析。あなたのこころが何に満たされるのかが、時間とともに見えてきます。</span><span class="en">Weekly happiness chart, monthly calendar view, weekly insights, and pattern analysis. Discover what truly makes your heart flourish.</span></p>
+      </div>
+      <div class="feat-phone"><img src="analysis.png" alt="Kokoro Analysis Screen" class="feat-screenshot"/></div>
     </div>
-    <div class="feat-card c-lav" style="grid-column: 1 / 4; max-width: 33.333%; margin: 0 auto;">
-      <span class="feat-icon">🌏</span>
-      <p class="feat-en"><span class="ja">せかい</span><span class="en">World</span></p>
-      <p class="feat-ja"><span class="ja">せかい</span><span class="en">せかい</span></p>
-      <p class="feat-desc"><span class="ja">あなたのこころを表すドラッグ可能なマスコットたちが暮らすバーチャルルーム。庭を育て、キャラクターを集め、あなたの心の風景を自由に作り上げます。</span><span class="en">Your virtual heart's room. Arrange mascots, grow a garden, and create your own heart's landscape. A living reflection of your inner world.</span></p>
-      <img src="world.png" alt="Kokoro World Screen" class="feat-screenshot"/>
+    <div class="feat-card c-lav">
+      <div class="feat-text">
+        <span class="feat-icon">🌏</span>
+        <p class="feat-en"><span class="ja">せかい</span><span class="en">World</span></p>
+        <p class="feat-ja"><span class="ja">せかい</span><span class="en">せかい</span></p>
+        <p class="feat-desc"><span class="ja">あなたのこころを表すドラッグ可能なマスコットたちが暮らすバーチャルルーム。庭を育て、キャラクターを集め、あなたの心の風景を自由に作り上げます。</span><span class="en">Your virtual heart's room. Arrange mascots, grow a garden, and create your own heart's landscape. A living reflection of your inner world.</span></p>
+      </div>
+      <div class="feat-phone"><img src="world.png" alt="Kokoro World Screen" class="feat-screenshot"/></div>
     </div>
   </div>
 </section>
@@ -623,25 +640,25 @@ footer {
     <div class="mascot-section">
       <div class="mascot-grid" style="margin-top:32px;">
         <div class="mascot-card active">
-          <div class="mascot-emoji">🌙</div>
+          <div class="mascot-emoji"><img src="moko.png" alt="モコ"/></div>
           <p class="mascot-name"><span class="ja">モコ</span><span class="en">Moko</span></p>
           <p class="mascot-type"><span class="ja">やすらぎタイプ</span><span class="en">Calm</span></p>
           <span class="mascot-status free"><span class="ja">静かに寄り添う</span><span class="en">Calm & Gentle</span></span>
         </div>
         <div class="mascot-card">
-          <div class="mascot-emoji">🌸</div>
+          <div class="mascot-emoji"><img src="milk.png" alt="ミルク"/></div>
           <p class="mascot-name"><span class="ja">ミルク</span><span class="en">Milk</span></p>
           <p class="mascot-type"><span class="ja">つながりタイプ</span><span class="en">Connection</span></p>
           <span class="mascot-status coin"><span class="ja">温かくつながる</span><span class="en">Warm & Connected</span></span>
         </div>
         <div class="mascot-card">
-          <div class="mascot-emoji">✨</div>
+          <div class="mascot-emoji"><img src="piko.png" alt="ピコ"/></div>
           <p class="mascot-name"><span class="ja">ピコ</span><span class="en">Piko</span></p>
           <p class="mascot-type"><span class="ja">好奇心タイプ</span><span class="en">Curiosity</span></p>
           <span class="mascot-status coin"><span class="ja">楽しく発見する</span><span class="en">Curious & Playful</span></span>
         </div>
         <div class="mascot-card">
-          <div class="mascot-emoji">🌱</div>
+          <div class="mascot-emoji"><img src="dash.png" alt="ダッシュ"/></div>
           <p class="mascot-name"><span class="ja">ダッシュ</span><span class="en">Dash</span></p>
           <p class="mascot-type"><span class="ja">チャレンジタイプ</span><span class="en">Growth</span></p>
           <span class="mascot-status free"><span class="ja">力強く成長する</span><span class="en">Bold & Growing</span></span>
