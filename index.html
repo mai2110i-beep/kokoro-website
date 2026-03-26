@@ -9,18 +9,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 :root {
-  --bg:       #EEEEF6;
-  --bg-card:  #F8F9FF;
-  --bg-dark:  #1A1828;
-  --border:   #DCDDF0;
-  --text-hi:  #1A1828;
-  --text-md:  #58547A;
-  --text-lo:  #A09CC0;
+  --bg:       #EEF3FA;
+  --bg-card:  #F8FAFF;
+  --bg-dark:  #1A2840;
+  --border:   #D0DEF0;
+  --text-hi:  #1A2840;
+  --text-md:  #4A5A7A;
+  --text-lo:  #8A9CC0;
   --blue:     #5B7EC8;
   --blue-lt:  #E8EEFA;
-  --lav:      #8870C8;
-  --lav-lt:   #F0ECFF;
-  --lav-mid:  #BEB0E8;
+  --lav:      #7EA8E6;
+  --lav-lt:   #E8F0FA;
+  --lav-mid:  #A8C8F0;
   --mint:     #56B0A8;
   --mint-lt:  #E4F6F4;
   --serif:    'Cormorant Garamond', Georgia, serif;
@@ -39,7 +39,7 @@ nav {
   position:fixed;top:0;left:0;right:0;z-index:200;
   height:64px;padding:0 48px;
   display:flex;align-items:center;justify-content:space-between;
-  background:rgba(238,238,246,.9);backdrop-filter:blur(20px);
+  background:rgba(238,243,250,.9);backdrop-filter:blur(20px);
   border-bottom:1px solid var(--border);
 }
 .nav-logo {
@@ -64,7 +64,7 @@ nav {
   padding:10px 22px;border-radius:100px;
   transition:all .2s;
 }
-.nav-cta:hover{box-shadow:0 4px 16px rgba(136,112,200,.4);transform:translateY(-1px);}
+.nav-cta:hover{box-shadow:0 4px 16px rgba(126,168,230,.4);transform:translateY(-1px);}
 
 /* ══ HERO ══ */
 .hero {
@@ -76,7 +76,7 @@ nav {
 .hero-blob1 {
   position:absolute;top:-300px;right:-200px;
   width:800px;height:800px;border-radius:50%;
-  background:radial-gradient(circle,rgba(136,112,200,.13) 0%,transparent 65%);
+  background:radial-gradient(circle,rgba(126,168,230,.13) 0%,transparent 65%);
   pointer-events:none;
 }
 .hero-blob2 {
@@ -120,10 +120,10 @@ nav {
   background:var(--lav);color:#fff;
   font-size:13px;font-weight:600;letter-spacing:.5px;
   padding:16px 36px;border-radius:100px;
-  box-shadow:0 8px 28px rgba(136,112,200,.35);
+  box-shadow:0 8px 28px rgba(126,168,230,.35);
   transition:all .22s;
 }
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(136,112,200,.45);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(126,168,230,.45);}
 .btn-outline {
   display:inline-flex;align-items:center;gap:8px;
   border:1.5px solid var(--border);color:var(--text-md);
@@ -144,64 +144,20 @@ nav {
 }
 .phone-glow {
   position:absolute;inset:-60px;
-  background:radial-gradient(circle,rgba(136,112,200,.22) 0%,transparent 65%);
+  background:radial-gradient(circle,rgba(126,168,230,.22) 0%,transparent 65%);
   animation:glowPulse 4s ease-in-out infinite;
   border-radius:50%;
 }
 @keyframes glowPulse{0%,100%{transform:scale(1);opacity:.7;}50%{transform:scale(1.1);opacity:1;}}
 .phone-frame {
-  width:270px;height:540px;
-  background:#1A1828;border-radius:42px;
-  border:8px solid #28243E;
-  box-shadow:0 48px 96px rgba(26,24,40,.45),0 0 0 1px rgba(255,255,255,.05);
+  width:270px;border-radius:36px;
+  box-shadow:0 48px 96px rgba(26,40,64,.35),0 0 0 1px rgba(255,255,255,.08);
   overflow:hidden;position:relative;
 }
-.phone-notch {
-  position:absolute;top:0;left:50%;transform:translateX(-50%);
-  width:88px;height:26px;background:#28243E;
-  border-radius:0 0 18px 18px;z-index:10;
+.phone-screenshot {
+  width:100%;height:auto;display:block;
 }
-.phone-screen {
-  width:100%;height:100%;
-  background:linear-gradient(160deg,#EEF0F8 0%,#E8EAFC 100%);
-  padding:36px 14px 14px;
-  display:flex;flex-direction:column;gap:8px;
-  font-family:var(--sans);
-}
-.ps-topbar{display:flex;justify-content:space-between;align-items:center;padding:0 2px;}
-.ps-greeting{font-size:7px;color:#8884A8;}
-.ps-appname{font-family:var(--serif);font-size:13px;font-weight:600;letter-spacing:2px;color:#1A1828;}
-.ps-hero-card {
-  background:linear-gradient(135deg,#D8D2F8,#C8BAF0);
-  border-radius:18px;padding:14px;
-  display:flex;align-items:center;gap:10px;
-}
-.ps-face{font-size:30px;}
-.ps-msg{flex:1;}
-.ps-msg-text{font-size:8px;color:#3C3858;font-weight:500;line-height:1.5;margin-bottom:6px;}
-.ps-scores{display:flex;gap:10px;}
-.ps-score-item{text-align:center;}
-.ps-score-val{font-family:var(--mono);font-size:16px;font-weight:700;color:#1A1828;display:block;}
-.ps-score-lbl{font-size:6px;color:#8884A8;}
-.ps-divider{width:1px;background:rgba(255,255,255,.4);align-self:stretch;}
-.ps-moko {
-  background:linear-gradient(135deg,#E8EEFA,#F0ECFF);
-  border-radius:14px;padding:10px 12px;
-  display:flex;align-items:center;gap:8px;
-}
-.ps-m-icon{font-size:20px;}
-.ps-m-body{flex:1;}
-.ps-m-label{font-size:6px;color:#A09CC0;letter-spacing:1px;text-transform:uppercase;}
-.ps-m-msg{font-size:9px;font-weight:500;color:#1A1828;}
-.ps-cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
-.ps-mini-card{
-  background:rgba(255,255,255,.75);border-radius:12px;padding:9px 10px;
-}
-.ps-mini-icon{font-size:10px;margin-bottom:2px;}
-.ps-mini-val{font-family:var(--mono);font-size:14px;font-weight:700;color:#1A1828;}
-.ps-mini-lbl{font-size:6px;color:#A09CC0;margin-top:1px;}
-.ps-mini-bar{height:2px;background:#DCDDF0;border-radius:2px;margin-top:5px;overflow:hidden;}
-.ps-mini-fill{height:100%;border-radius:2px;}
+/* (removed old CSS mockup styles — now using real screenshots) */
 
 /* Floating chips */
 .float-chip {
@@ -209,7 +165,7 @@ nav {
   background:var(--bg-card);border:1px solid var(--border);
   border-radius:100px;padding:8px 16px;
   font-size:12px;color:var(--text-md);
-  box-shadow:0 8px 28px rgba(26,24,40,.1);
+  box-shadow:0 8px 28px rgba(26,40,64,.1);
   white-space:nowrap;
   animation:floatY 3s ease-in-out infinite;
 }
@@ -245,7 +201,7 @@ nav {
 .phil-bg-glow {
   position:absolute;top:-200px;right:-200px;
   width:700px;height:700px;border-radius:50%;
-  background:radial-gradient(circle,rgba(136,112,200,.18) 0%,transparent 65%);
+  background:radial-gradient(circle,rgba(126,168,230,.18) 0%,transparent 65%);
   pointer-events:none;
 }
 .section-eyebrow {
@@ -313,7 +269,7 @@ nav {
   position:relative;overflow:hidden;
   transition:transform .22s,box-shadow .22s;
 }
-.feat-card:hover{transform:translateY(-5px);box-shadow:0 20px 56px rgba(26,24,40,.09);}
+.feat-card:hover{transform:translateY(-5px);box-shadow:0 20px 56px rgba(26,40,64,.09);}
 .feat-card::after {
   content:'';position:absolute;top:0;left:0;right:0;height:3px;
   border-radius:24px 24px 0 0;
@@ -328,6 +284,7 @@ nav {
 }
 .feat-ja{font-size:11px;color:var(--text-lo);letter-spacing:1.5px;margin-bottom:18px;}
 .feat-desc{font-size:13px;line-height:1.95;color:var(--text-md);}
+.feat-screenshot{width:100%;border-radius:14px;margin-top:20px;box-shadow:0 6px 20px rgba(26,40,64,.1);}
 
 /* ══ WORLD — journey ══ */
 .journey-path{margin-top:64px;position:relative;}
@@ -365,7 +322,7 @@ nav {
   border-radius:20px;padding:24px 16px 20px;text-align:center;
   backdrop-filter:blur(8px);transition:transform .22s,box-shadow .22s;
 }
-.mascot-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(26,24,40,.1);}
+.mascot-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(26,40,64,.1);}
 .mascot-card.active{border-color:var(--lav-mid);background:rgba(240,236,255,.8);}
 .mascot-emoji{font-size:44px;margin-bottom:12px;display:block;}
 .mascot-name{font-family:var(--serif);font-size:17px;color:var(--text-hi);margin-bottom:4px;}
@@ -412,7 +369,7 @@ nav {
 .notify-blob {
   position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
   width:900px;height:900px;border-radius:50%;
-  background:radial-gradient(circle,rgba(136,112,200,.09) 0%,transparent 65%);
+  background:radial-gradient(circle,rgba(126,168,230,.09) 0%,transparent 65%);
   pointer-events:none;
 }
 .notify-eyebrow{justify-content:center;}
@@ -443,7 +400,7 @@ nav {
   padding:14px 28px;border-radius:100px;
   transition:all .2s;flex-shrink:0;
 }
-.email-submit:hover{box-shadow:0 4px 16px rgba(136,112,200,.4);}
+.email-submit:hover{box-shadow:0 4px 16px rgba(126,168,230,.4);}
 .email-note{font-size:11px;color:var(--text-lo);margin-top:14px;}
 
 /* ══ FOOTER ══ */
@@ -543,55 +500,7 @@ footer {
     <div class="phone-outer">
       <div class="phone-glow"></div>
       <div class="phone-frame">
-        <div class="phone-notch"></div>
-        <div class="phone-screen">
-          <div class="ps-topbar">
-            <span class="ps-greeting">おはようございます</span>
-            <span class="ps-appname">KOKORO</span>
-          </div>
-          <div class="ps-hero-card">
-            <div class="ps-face">🌕</div>
-            <div class="ps-msg">
-              <p class="ps-msg-text">おだやかにいい感じ。<br>この調子で。</p>
-              <div class="ps-scores">
-                <div class="ps-score-item">
-                  <strong class="ps-score-val">72</strong>
-                  <span class="ps-score-lbl">今日</span>
-                </div>
-                <div class="ps-divider"></div>
-                <div class="ps-score-item">
-                  <strong class="ps-score-val">68</strong>
-                  <span class="ps-score-lbl">7日平均</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="ps-moko">
-            <span class="ps-m-icon">🌸</span>
-            <div class="ps-m-body">
-              <span class="ps-m-label">Moko:</span>
-              <p class="ps-m-msg">温かさを感じてね</p>
-            </div>
-          </div>
-          <div class="ps-cards-grid">
-            <div class="ps-mini-card">
-              <div class="ps-mini-icon">😊</div>
-              <div class="ps-mini-val">良い</div>
-            </div>
-            <div class="ps-mini-card">
-              <div class="ps-mini-icon">😐</div>
-              <div class="ps-mini-val">普通</div>
-            </div>
-            <div class="ps-mini-card">
-              <div class="ps-mini-icon">😢</div>
-              <div class="ps-mini-val">疲れ</div>
-            </div>
-            <div class="ps-mini-card">
-              <div class="ps-mini-icon">✨</div>
-              <div class="ps-mini-val">選ぶ</div>
-            </div>
-          </div>
-        </div>
+        <img src="home.png" alt="Kokoro Home Screen" class="phone-screenshot"/>
       </div>
       <div class="float-chip fc1">🌸 <span class="ja">つながり型</span><span class="en">Connection type</span></div>
       <div class="float-chip fc2">✨ <span class="ja">毎日のご褒美</span><span class="en">Daily sparkles</span></div>
@@ -669,24 +578,28 @@ footer {
       <p class="feat-en"><span class="ja">ホーム</span><span class="en">Home</span></p>
       <p class="feat-ja"><span class="ja">ホーム</span><span class="en">ホーム</span></p>
       <p class="feat-desc"><span class="ja">今日のあなたのこころの状態を一目で。幸福度スコア、あなたのこころタイプ、各要素のスコア、そしてAIが提案する今日のアクション。毎日の変化を感じます。</span><span class="en">See your heart at a glance. Today's happiness score, your Kokoro type, factor analysis, and AI-suggested actions to nurture what matters most.</span></p>
+      <img src="home.png" alt="Kokoro Home Screen" class="feat-screenshot"/>
     </div>
     <div class="feat-card c-blue">
       <span class="feat-icon">📝</span>
       <p class="feat-en"><span class="ja">記録</span><span class="en">Record</span></p>
       <p class="feat-ja"><span class="ja">記録</span><span class="en">記録</span></p>
       <p class="feat-desc"><span class="ja">毎日の幸福度（0-100）、気分（元気/まあまあ/つかれた）、4つの要素のドット評価、できたこと日記、CBT思考記録。あなたのこころの内側を丁寧に記録します。</span><span class="en">Daily happiness slider, mood check, factor ratings, accomplishment journal, and CBT thought recording. Capture your inner world with depth and care.</span></p>
+      <img src="record.png" alt="Kokoro Record Screen" class="feat-screenshot"/>
     </div>
     <div class="feat-card c-mint">
       <span class="feat-icon">📊</span>
       <p class="feat-en"><span class="ja">振り返り</span><span class="en">Analysis</span></p>
       <p class="feat-ja"><span class="ja">振り返り</span><span class="en">振り返り</span></p>
       <p class="feat-desc"><span class="ja">週間の幸福度グラフ、月間カレンダー、週間の洞察、パターン分析。あなたのこころが何に満たされるのかが、時間とともに見えてきます。</span><span class="en">Weekly happiness chart, monthly calendar view, weekly insights, and pattern analysis. Discover what truly makes your heart flourish.</span></p>
+      <img src="analysis.png" alt="Kokoro Analysis Screen" class="feat-screenshot"/>
     </div>
     <div class="feat-card c-lav" style="grid-column: 1 / 4; max-width: 33.333%; margin: 0 auto;">
       <span class="feat-icon">🌏</span>
       <p class="feat-en"><span class="ja">せかい</span><span class="en">World</span></p>
       <p class="feat-ja"><span class="ja">せかい</span><span class="en">せかい</span></p>
       <p class="feat-desc"><span class="ja">あなたのこころを表すドラッグ可能なマスコットたちが暮らすバーチャルルーム。庭を育て、キャラクターを集め、あなたの心の風景を自由に作り上げます。</span><span class="en">Your virtual heart's room. Arrange mascots, grow a garden, and create your own heart's landscape. A living reflection of your inner world.</span></p>
+      <img src="world.png" alt="Kokoro World Screen" class="feat-screenshot"/>
     </div>
   </div>
 </section>
@@ -737,7 +650,7 @@ footer {
     </div>
   </div>
 
-  <div style="margin-top:64px;padding:40px;background:linear-gradient(135deg,rgba(136,112,200,.08),rgba(91,126,200,.06));border-radius:20px;text-align:center;border:1px solid var(--border);">
+  <div style="margin-top:64px;padding:40px;background:linear-gradient(135deg,rgba(126,168,230,.08),rgba(91,126,200,.06));border-radius:20px;text-align:center;border:1px solid var(--border);">
     <p style="font-family:var(--serif);font-size:18px;font-style:italic;color:var(--text-hi);line-height:1.6;margin:0;"><span class="ja">「あなたのこころを映すために、<br>ぼくらはここにいます。<br>一緒に成長しましょう。」</span><span class="en">"We're here to reflect your heart.<br>Let's grow together."</span></p>
   </div>
 </section>
